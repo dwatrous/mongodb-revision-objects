@@ -5,4 +5,4 @@ This project covers the management of versioned objects in MongoDB. This builds 
 
 http://software.danielwatrous.com/representing-revision-data-in-mongodb/
 
-More to come
+This implementation focuses on Java using Morphia (https://code.google.com/p/morphia/) as a mapping technology
