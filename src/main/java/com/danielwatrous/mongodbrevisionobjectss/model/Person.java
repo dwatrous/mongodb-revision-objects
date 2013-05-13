@@ -8,63 +8,19 @@ package com.danielwatrous.mongodbrevisionobjectss.model;
  *
  * @author watrous
  */
-public class Person {
-    private PersonName name;
-    private Integer age;
-    private String email;
-    private boolean happy;
-    
-    private class PersonName {
-        private String firstName;
-        private String lastName;
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
+public interface Person {
+    PersonName getName();
+    void setName(PersonName name);
+    Integer getAge();
+    void setAge(Integer age);
+    String getEmail();
+    void setEmail(String email);
+    boolean isHappy();
+    void setHappy(boolean happy);
+    public interface PersonName {
+        String getFirstName();
+        void setFirstName(String firstName);
+        String getLastName();
+        void setLastName(String lastName);
     }
-
-    public PersonName getName() {
-        return name;
-    }
-
-    public void setName(PersonName name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public boolean isHappy() {
-        return happy;
-    }
-
-    public void setHappy(boolean happy) {
-        this.happy = happy;
-    }
-    
 }
