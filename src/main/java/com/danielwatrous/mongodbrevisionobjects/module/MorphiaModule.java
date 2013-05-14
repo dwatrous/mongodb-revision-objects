@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.danielwatrous.mongodbrevisionobjectss.module;
+package com.danielwatrous.mongodbrevisionobjects.module;
 
-import com.danielwatrous.mongodbrevisionobjectss.model.DisplayMode;
-import com.danielwatrous.mongodbrevisionobjectss.module.providers.MongoConnectionProvider;
-import com.danielwatrous.mongodbrevisionobjectss.persistence.dao.PersonDAO;
-import com.danielwatrous.mongodbrevisionobjectss.persistence.dao.morphia.MorphiaPersonDAO;
-import com.danielwatrous.mongodbrevisionobjectss.state.CurrentDisplayMode;
+import com.danielwatrous.mongodbrevisionobjects.model.DisplayMode;
+import com.danielwatrous.mongodbrevisionobjects.module.providers.MongoConnectionProvider;
+import com.danielwatrous.mongodbrevisionobjects.persistence.dao.PersonDAO;
+import com.danielwatrous.mongodbrevisionobjects.persistence.dao.morphia.MorphiaPersonDAO;
+import com.danielwatrous.mongodbrevisionobjects.state.CurrentDisplayMode;
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
 import com.google.inject.AbstractModule;

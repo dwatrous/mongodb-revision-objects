@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.danielwatrous.mongodbrevisionobjectss.state;
+package com.danielwatrous.mongodbrevisionobjects.state;
 
-import com.danielwatrous.mongodbrevisionobjectss.model.DisplayMode;
+import com.danielwatrous.mongodbrevisionobjects.model.DisplayMode;
 
 /**
  *

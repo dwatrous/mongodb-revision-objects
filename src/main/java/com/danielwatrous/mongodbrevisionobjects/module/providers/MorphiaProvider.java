@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.danielwatrous.mongodbrevisionobjectss.module.providers;
+package com.danielwatrous.mongodbrevisionobjects.module.providers;
 
 import com.google.code.morphia.Morphia;
 import com.google.inject.Provider;

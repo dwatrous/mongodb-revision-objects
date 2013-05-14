@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.danielwatrous.mongodbrevisionobjectss.persistence.dao.morphia;
+package com.danielwatrous.mongodbrevisionobjects.persistence.dao.morphia;
 
-import com.danielwatrous.mongodbrevisionobjectss.model.Person;
-import com.danielwatrous.mongodbrevisionobjectss.model.Person.PersonName;
-import com.danielwatrous.mongodbrevisionobjectss.persistence.dao.PersonDAO;
+import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
+import com.danielwatrous.mongodbrevisionobjects.persistence.dao.PersonDAO;
 import java.util.List;
 
 /**

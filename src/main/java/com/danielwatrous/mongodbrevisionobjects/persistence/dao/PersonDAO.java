@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.danielwatrous.mongodbrevisionobjectss.persistence.dao;
+package com.danielwatrous.mongodbrevisionobjects.persistence.dao;
 
-import com.danielwatrous.mongodbrevisionobjectss.model.Person;
-import com.danielwatrous.mongodbrevisionobjectss.model.Person.PersonName;
+import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
 import java.util.List;
 
 /**

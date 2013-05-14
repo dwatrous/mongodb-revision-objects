@@ -2,16 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.danielwatrous.mongodbrevisionobjectss.persistence.dao.mock;
+package com.danielwatrous.mongodbrevisionobjects.persistence.dao.mock;
 
-import com.danielwatrous.mongodbrevisionobjectss.model.DisplayMode;
-import com.danielwatrous.mongodbrevisionobjectss.model.Person;
-import com.danielwatrous.mongodbrevisionobjectss.model.Person.PersonName;
-import com.danielwatrous.mongodbrevisionobjectss.model.VersionedPerson;
-import com.danielwatrous.mongodbrevisionobjectss.model.mock.MockPerson;
-import com.danielwatrous.mongodbrevisionobjectss.model.mock.MockPersonName;
-import com.danielwatrous.mongodbrevisionobjectss.model.mock.MockVersionedPerson;
-import com.danielwatrous.mongodbrevisionobjectss.persistence.dao.PersonDAO;
+import com.danielwatrous.mongodbrevisionobjects.model.DisplayMode;
+import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
+import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
+import com.danielwatrous.mongodbrevisionobjects.model.mock.MockPerson;
+import com.danielwatrous.mongodbrevisionobjects.model.mock.MockPersonName;
+import com.danielwatrous.mongodbrevisionobjects.model.mock.MockVersionedPerson;
+import com.danielwatrous.mongodbrevisionobjects.persistence.dao.PersonDAO;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;

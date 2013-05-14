@@ -4,11 +4,12 @@
  */
 package com.danielwatrous.mongodbrevisionobjectss.persistence.dao;
 
-import com.danielwatrous.mongodbrevisionobjectss.factory.PersonNameFactory;
-import com.danielwatrous.mongodbrevisionobjectss.model.DisplayMode;
-import com.danielwatrous.mongodbrevisionobjectss.model.Person;
-import com.danielwatrous.mongodbrevisionobjectss.model.Person.PersonName;
-import com.danielwatrous.mongodbrevisionobjectss.module.TestModule;
+import com.danielwatrous.mongodbrevisionobjects.persistence.dao.PersonDAO;
+import com.danielwatrous.mongodbrevisionobjects.factory.PersonNameFactory;
+import com.danielwatrous.mongodbrevisionobjects.model.DisplayMode;
+import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
+import com.danielwatrous.mongodbrevisionobjects.module.TestModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import junit.framework.TestCase;

@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.danielwatrous.mongodbrevisionobjectss.model.morphia;
+package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 
-import com.danielwatrous.mongodbrevisionobjectss.model.Person;
-import com.danielwatrous.mongodbrevisionobjectss.model.VersionedPerson;
+import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
 import com.google.code.morphia.annotations.Entity;
 import java.util.Map;
 
