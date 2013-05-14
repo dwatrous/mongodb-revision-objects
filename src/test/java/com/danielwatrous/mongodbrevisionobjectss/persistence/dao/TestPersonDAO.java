@@ -36,6 +36,7 @@ public class TestPersonDAO extends TestCase {
     }
     
     public void testRetrievePersonPublished() {
+        // retrieve personDAO and query for a Person by name
         PersonDAO personDAO = injector.getInstance(PersonDAO.class);
         PersonName searchName = injector.getInstance(PersonNameFactory.class).create("Daniel", "Watrous");
         Person person = personDAO.getPersonByName(searchName);
@@ -43,11 +44,21 @@ public class TestPersonDAO extends TestCase {
     }
 
     public void testRetrievePersonDraft() {
+        // enable preview mode
         injector.getInstance(DisplayMode.class).enablePreviewModeActive();
+        // retrieve personDAO and query for a Person by name
         PersonDAO personDAO = injector.getInstance(PersonDAO.class);
         PersonName searchName = injector.getInstance(PersonNameFactory.class).create("Daniel", "Watrous");
         Person person = personDAO.getPersonByName(searchName);
         assertEquals("daniel@new.com", person.getEmail());
     }
 
+    public void testRetrievePersonHistory() {
+        String historyMarker = "1";
+        // retrieve personDAO and query for a Person with history marker
+        PersonDAO personDAO = injector.getInstance(PersonDAO.class);
+        PersonName searchName = injector.getInstance(PersonNameFactory.class).create("Jough", "Psmyth");
+        Person person = personDAO.getPersonByName(searchName, historyMarker);
+        assertEquals("chip@nootherstory.com", person.getEmail());        
+    }
 }
