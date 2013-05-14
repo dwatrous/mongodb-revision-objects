@@ -1,4 +1,4 @@
-package com.danielwatrous.mongodbrevisionobjectss;
+package com.danielwatrous.mongodbrevisionobjects;
 
 /**
  * Hello world!
