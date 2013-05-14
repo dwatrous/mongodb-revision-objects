@@ -4,6 +4,9 @@
  */
 package com.danielwatrous.mongodbrevisionobjects.persistence.dao.mock;
 
+import com.danielwatrous.mongodbrevisionobjects.factory.PersonFactory;
+import com.danielwatrous.mongodbrevisionobjects.factory.PersonNameFactory;
+import com.danielwatrous.mongodbrevisionobjects.factory.VersionedPersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.model.DisplayMode;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
@@ -23,21 +26,40 @@ import java.util.Map;
  * @author watrous
  */
 public class MockPersonDAO implements PersonDAO {
-    
-    @Inject DisplayMode displayMode;
-    static final PersonName name1 = new MockPersonName("Daniel", "Watrous");
-    static final PersonName name2 = new MockPersonName("Jough", "Psmyth");
-    static final PersonName name2_b = new MockPersonName("Chip", "Cheesman");
-    static final PersonName name3 = new MockPersonName("Ted", "Bear");
-    static final Person person1 = new MockPerson(name1, 32, "daniel@test.com", true);
-    static final Person person1_b = new MockPerson(name1, 33, "daniel@new.com", true);
-    static final Person person2 = new MockPerson(name2, 14, "jough@nootherstory.com", true);
-    static final Person person2_b = new MockPerson(name2_b, 14, "chip@nootherstory.com", true);
-    static final Person person3 = new MockPerson(name3, 32, "ted@bear.com", false);
-    static final Map<String, Person> personMap = new HashMap<String, Person>();
-    static final VersionedPerson versionedPerson1 = new MockVersionedPerson(person1, person1_b, null);
-    static final VersionedPerson versionedPerson2 = new MockVersionedPerson(person2, person2, personMap);
-    static final VersionedPerson versionedPerson3 = new MockVersionedPerson(person3, null, null);
+
+    private DisplayMode displayMode;
+    private PersonName name1;
+    private PersonName name2;
+    private PersonName name2_b;
+    private PersonName name3;
+    private Person person1;
+    private Person person1_b;
+    private Person person2;
+    private Person person2_b;
+    private Person person3;
+    private Map<String, Person> personMap;
+    private VersionedPerson versionedPerson1;
+    private VersionedPerson versionedPerson2;
+    private VersionedPerson versionedPerson3;
+
+    @Inject
+    public MockPersonDAO(DisplayMode displayMode, PersonNameFactory personNameFactory, PersonFactory personFactory, VersionedPersonFactory versionedPersonFactory) {
+        this.displayMode = displayMode;
+        name1 = personNameFactory.create("Daniel", "Watrous");
+        name2 = personNameFactory.create("Jough", "Psmyth");
+        name2_b = personNameFactory.create("Chip", "Cheesman");
+        name3 = personNameFactory.create("Ted", "Bear");
+        person1 = personFactory.create(name1, 32, "daniel@test.com", true);
+        person1_b = personFactory.create(name1, 33, "daniel@new.com", true);
+        person2 = personFactory.create(name2, 14, "jough@nootherstory.com", true);
+        person2_b = personFactory.create(name2_b, 14, "chip@nootherstory.com", true);
+        person3 = personFactory.create(name3, 32, "ted@bear.com", false);
+        personMap = new HashMap<String, Person>();
+        personMap.put("1", person2_b);
+        versionedPerson1 = versionedPersonFactory.create(person1, person1_b, new HashMap<String, Person>());
+        versionedPerson2 = versionedPersonFactory.create(person2, person2, personMap);
+        versionedPerson3 = versionedPersonFactory.create(person3, person3, new HashMap<String, Person>());
+    }
 
     public void saveAsDraft(Person person) {
         throw new UnsupportedOperationException("Not supported in test."); //To change body of generated methods, choose Tools | Templates.
@@ -56,7 +78,6 @@ public class MockPersonDAO implements PersonDAO {
     }
 
     public Person getPersonByName(PersonName name, String historyMarker) {
-        versionedPerson2.getHistory().put("1", person2_b);
         return versionedPerson2.getHistory().get(historyMarker);
     }
 

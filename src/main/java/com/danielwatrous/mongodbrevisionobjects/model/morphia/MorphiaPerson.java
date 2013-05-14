@@ -5,36 +5,25 @@
 package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 
 /**
  *
  * @author watrous
  */
-public class MorphiaPerson {
+public class MorphiaPerson implements Person{
     private Person.PersonName name;
     private Integer age;
     private String email;
     private boolean happy;
 
-    class MorphiaPersonName implements Person.PersonName {
-        private String firstName;
-        private String lastName;
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
+    @Inject
+    public MorphiaPerson(@Assisted PersonName name, @Assisted Integer age, @Assisted String email, @Assisted boolean happy) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+        this.happy = happy;
     }
 
     public Person.PersonName getName() {
