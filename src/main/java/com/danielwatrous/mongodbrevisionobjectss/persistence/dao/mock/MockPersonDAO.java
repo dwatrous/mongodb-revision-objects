@@ -4,6 +4,7 @@
  */
 package com.danielwatrous.mongodbrevisionobjectss.persistence.dao.mock;
 
+import com.danielwatrous.mongodbrevisionobjectss.model.DisplayMode;
 import com.danielwatrous.mongodbrevisionobjectss.model.Person;
 import com.danielwatrous.mongodbrevisionobjectss.model.Person.PersonName;
 import com.danielwatrous.mongodbrevisionobjectss.model.VersionedPerson;
@@ -11,6 +12,7 @@ import com.danielwatrous.mongodbrevisionobjectss.model.mock.MockPerson;
 import com.danielwatrous.mongodbrevisionobjectss.model.mock.MockPersonName;
 import com.danielwatrous.mongodbrevisionobjectss.model.mock.MockVersionedPerson;
 import com.danielwatrous.mongodbrevisionobjectss.persistence.dao.PersonDAO;
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,16 +24,18 @@ import java.util.Map;
  */
 public class MockPersonDAO implements PersonDAO {
     
+    @Inject DisplayMode displayMode;
     static final PersonName name1 = new MockPersonName("Daniel", "Watrous");
     static final PersonName name2 = new MockPersonName("Jough", "Psmyth");
     static final PersonName name2_b = new MockPersonName("Chip", "Cheesman");
     static final PersonName name3 = new MockPersonName("Ted", "Bear");
     static final Person person1 = new MockPerson(name1, 32, "daniel@test.com", true);
+    static final Person person1_b = new MockPerson(name1, 33, "daniel@new.com", true);
     static final Person person2 = new MockPerson(name2, 14, "jough@nootherstory.com", true);
     static final Person person2_b = new MockPerson(name2_b, 14, "chip@nootherstory.com", true);
     static final Person person3 = new MockPerson(name3, 32, "ted@bear.com", false);
     static final Map<String, Person> personMap = new HashMap<String, Person>();
-    static final VersionedPerson versionedPerson1 = new MockVersionedPerson(person1, null, null);
+    static final VersionedPerson versionedPerson1 = new MockVersionedPerson(person1, person1_b, null);
     static final VersionedPerson versionedPerson2 = new MockVersionedPerson(person2, person2, personMap);
     static final VersionedPerson versionedPerson3 = new MockVersionedPerson(person3, null, null);
 
@@ -45,7 +49,7 @@ public class MockPersonDAO implements PersonDAO {
 
     public Person getPersonByName(PersonName name) {
         if (name.getFirstName().equalsIgnoreCase("Daniel") && name.getLastName().equalsIgnoreCase("Watrous")) {
-            return versionedPerson1.getPublished();
+            return getAppropriateDisplayOption(versionedPerson1);
         } else {
             return null;
         }
@@ -58,10 +62,18 @@ public class MockPersonDAO implements PersonDAO {
 
     public List<Person> getPersonsByLastName(String lastName) {
         List<Person> persons = new ArrayList<Person>();
-        persons.add(versionedPerson1.getPublished());
-        persons.add(versionedPerson2.getPublished());
-        persons.add(versionedPerson3.getPublished());
+        persons.add(getAppropriateDisplayOption(versionedPerson1));
+        persons.add(getAppropriateDisplayOption(versionedPerson2));
+        persons.add(getAppropriateDisplayOption(versionedPerson3));
         return persons;
+    }
+    
+    private Person getAppropriateDisplayOption(VersionedPerson versionedPerson) {
+        if (displayMode.isPreviewModeActive()) {
+            return versionedPerson.getDraft();
+        } else {
+            return versionedPerson.getPublished();
+        }
     }
     
 }
