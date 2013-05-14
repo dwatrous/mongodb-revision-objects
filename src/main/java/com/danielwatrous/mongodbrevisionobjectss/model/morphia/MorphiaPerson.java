@@ -16,7 +16,7 @@ public class MorphiaPerson {
     private String email;
     private boolean happy;
 
-    private class MorphiaPersonName implements Person.PersonName {
+    class MorphiaPersonName implements Person.PersonName {
         private String firstName;
         private String lastName;
 
