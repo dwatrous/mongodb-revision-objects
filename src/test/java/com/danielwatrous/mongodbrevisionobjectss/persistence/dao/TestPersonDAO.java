@@ -4,8 +4,8 @@
  */
 package com.danielwatrous.mongodbrevisionobjectss.persistence.dao;
 
-import com.danielwatrous.mongodbrevisionobjectss.factory.PersonFactory;
 import com.danielwatrous.mongodbrevisionobjectss.factory.PersonNameFactory;
+import com.danielwatrous.mongodbrevisionobjectss.model.DisplayMode;
 import com.danielwatrous.mongodbrevisionobjectss.model.Person;
 import com.danielwatrous.mongodbrevisionobjectss.model.Person.PersonName;
 import com.danielwatrous.mongodbrevisionobjectss.module.TestModule;
@@ -35,11 +35,19 @@ public class TestPersonDAO extends TestCase {
         super (testName);
     }
     
-    public void testRetrievePerson() {
+    public void testRetrievePersonPublished() {
         PersonDAO personDAO = injector.getInstance(PersonDAO.class);
         PersonName searchName = injector.getInstance(PersonNameFactory.class).create("Daniel", "Watrous");
         Person person = personDAO.getPersonByName(searchName);
         assertEquals("daniel@test.com", person.getEmail());
+    }
+
+    public void testRetrievePersonDraft() {
+        injector.getInstance(DisplayMode.class).enablePreviewModeActive();
+        PersonDAO personDAO = injector.getInstance(PersonDAO.class);
+        PersonName searchName = injector.getInstance(PersonNameFactory.class).create("Daniel", "Watrous");
+        Person person = personDAO.getPersonByName(searchName);
+        assertEquals("daniel@new.com", person.getEmail());
     }
 
 }
