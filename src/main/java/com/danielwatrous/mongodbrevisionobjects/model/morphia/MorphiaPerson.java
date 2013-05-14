@@ -5,6 +5,7 @@
 package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.google.code.morphia.annotations.Entity;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
@@ -12,6 +13,7 @@ import com.google.inject.assistedinject.Assisted;
  *
  * @author watrous
  */
+@Entity(noClassnameStored = true)
 public class MorphiaPerson implements Person{
     private Person.PersonName name;
     private Integer age;

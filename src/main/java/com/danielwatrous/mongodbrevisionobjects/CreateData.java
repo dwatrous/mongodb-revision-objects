@@ -10,8 +10,12 @@ import com.danielwatrous.mongodbrevisionobjects.factory.VersionedPersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
 import com.danielwatrous.mongodbrevisionobjects.module.MorphiaModule;
+import com.google.code.morphia.Datastore;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.name.Named;
+import com.google.inject.name.Names;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,5 +44,9 @@ public class CreateData {
         history.put("2", history2Person);
         
         VersionedPerson versionedPerson = versionedPersonFactory.create(publishedPerson, draftPerson, history);
+        
+        Datastore ds = injector.getInstance(Key.get(Datastore.class, Names.named("peopleDatabase")));
+        ds.save(versionedPerson);
+        
     }
 }
