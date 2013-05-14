@@ -5,6 +5,8 @@
 package com.danielwatrous.mongodbrevisionobjects.model.mock;
 
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 
 /**
  *
@@ -16,10 +18,8 @@ public class MockPerson implements Person {
     private String email;
     private boolean happy;
 
-    public MockPerson() {
-    }
-
-    public MockPerson(PersonName name, Integer age, String email, boolean happy) {
+    @Inject
+    public MockPerson(@Assisted PersonName name, @Assisted Integer age, @Assisted String email, @Assisted boolean happy) {
         this.name = name;
         this.age = age;
         this.email = email;

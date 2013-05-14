@@ -6,6 +6,8 @@ package com.danielwatrous.mongodbrevisionobjects.model.mock;
 
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import java.util.Map;
 
 /**
@@ -17,7 +19,8 @@ public class MockVersionedPerson implements VersionedPerson {
     private Person draft;
     private Map<String, Person> history;
 
-    public MockVersionedPerson(Person published, Person draft, Map<String, Person> history) {
+    @Inject
+    public MockVersionedPerson(@Assisted("published") Person published, @Assisted("draft") Person draft, @Assisted("history") Map<String, Person> history) {
         this.published = published;
         this.draft = draft;
         this.history = history;

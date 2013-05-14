@@ -7,6 +7,8 @@ package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
 import com.google.code.morphia.annotations.Entity;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import java.util.Map;
 
 /**
@@ -18,6 +20,13 @@ public class MorphiaVersionedPerson implements VersionedPerson {
     private Person published;
     private Person draft;
     private Map<String, Person> history;
+
+    @Inject
+    public MorphiaVersionedPerson(@Assisted("published") Person published, @Assisted("draft") Person draft, @Assisted("history") Map<String, Person> history) {
+        this.published = published;
+        this.draft = draft;
+        this.history = history;
+    }
 
     public Person getPublished() {
         return published;
