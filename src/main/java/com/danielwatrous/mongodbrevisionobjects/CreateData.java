@@ -10,8 +10,10 @@ import com.danielwatrous.mongodbrevisionobjects.factory.PersonNameFactory;
 import com.danielwatrous.mongodbrevisionobjects.factory.VersionedPersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.model.HistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
 import com.danielwatrous.mongodbrevisionobjects.module.MorphiaModule;
+import com.danielwatrous.mongodbrevisionobjects.persistence.dao.PersonDAO;
 import com.google.code.morphia.Datastore;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -32,11 +34,18 @@ public class CreateData {
         Injector injector = Guice.createInjector(new MorphiaModule());
 
         // create some person objects
+        PersonDAO personDao = injector.getInstance(PersonDAO.class);
+        
         PersonNameFactory personNameFactory = injector.getInstance(PersonNameFactory.class);
         PersonFactory personFactory = injector.getInstance(PersonFactory.class);
         VersionedPersonFactory versionedPersonFactory = injector.getInstance(VersionedPersonFactory.class);
 
-        Person publishedPerson = personFactory.create(personNameFactory.create("Daniel", "Watrous"), 32, "daniel@current.com", true);
+        PersonName name = personNameFactory.create("Daniel", "Watrous");
+        Person publishedPerson = personFactory.create(name, 32, "daniel@current.com", true);
+        personDao.save(publishedPerson);
+        
+//        VersionedPerson versionedPerson = personDao.getPersonByName(name);
+        
         Person draftPerson = personFactory.create(personNameFactory.create("Daniel", "Watrous"), 33, "daniel@future.com", true);
         Person history1Person = personFactory.create(personNameFactory.create("Danny", "Watrous"), 23, "daniel@oldschool.com", false);
         Person history2Person = personFactory.create(personNameFactory.create("Dan", "Watrous"), 33, "daniel@beforeinternet.com", true);
@@ -47,7 +56,7 @@ public class CreateData {
         versionedPerson.addToHistory(history2Person);
         
         Datastore ds = injector.getInstance(Key.get(Datastore.class, Names.named("peopleDatabase")));
-        ds.save(versionedPerson);
+//        ds.save(versionedPerson);
         
     }
 }
