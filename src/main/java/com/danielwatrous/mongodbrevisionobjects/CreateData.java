@@ -4,9 +4,11 @@
  */
 package com.danielwatrous.mongodbrevisionobjects;
 
+import com.danielwatrous.mongodbrevisionobjects.factory.HistoricalPersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.factory.PersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.factory.PersonNameFactory;
 import com.danielwatrous.mongodbrevisionobjects.factory.VersionedPersonFactory;
+import com.danielwatrous.mongodbrevisionobjects.model.HistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
 import com.danielwatrous.mongodbrevisionobjects.module.MorphiaModule;
@@ -32,14 +34,15 @@ public class CreateData {
         // create some person objects
         PersonNameFactory personNameFactory = injector.getInstance(PersonNameFactory.class);
         PersonFactory personFactory = injector.getInstance(PersonFactory.class);
+        HistoricalPersonFactory historicalPersonFactory = injector.getInstance(HistoricalPersonFactory.class);
         VersionedPersonFactory versionedPersonFactory = injector.getInstance(VersionedPersonFactory.class);
 
         Person publishedPerson = personFactory.create(personNameFactory.create("Daniel", "Watrous"), 32, "daniel@current.com", true);
         Person draftPerson = personFactory.create(personNameFactory.create("Daniel", "Watrous"), 33, "daniel@future.com", true);
-        Person history1Person = personFactory.create(personNameFactory.create("Dan", "Watrous"), 23, "daniel@oldschool.com", false);
-        Person history2Person = personFactory.create(personNameFactory.create("Danny", "Watrous"), 33, "daniel@beforeinternet.com", true);
+        HistoricalPerson history1Person = historicalPersonFactory.create(personFactory.create(personNameFactory.create("Dan", "Watrous"), 23, "daniel@oldschool.com", false));
+        HistoricalPerson history2Person = historicalPersonFactory.create(personFactory.create(personNameFactory.create("Danny", "Watrous"), 33, "daniel@beforeinternet.com", true));
 
-        Map<String, Person> history = new HashMap<String, Person>();
+        Map<String, HistoricalPerson> history = new HashMap<String, HistoricalPerson>();
         history.put("1", history1Person);
         history.put("2", history2Person);
         

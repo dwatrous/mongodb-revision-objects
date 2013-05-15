@@ -14,7 +14,7 @@ import com.google.inject.assistedinject.Assisted;
  * @author watrous
  */
 @Entity(noClassnameStored = true)
-public class MorphiaPerson implements Person{
+public class MorphiaPerson implements Person {
     private Person.PersonName name;
     private Integer age;
     private String email;

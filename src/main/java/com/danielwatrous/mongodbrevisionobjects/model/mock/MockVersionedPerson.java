@@ -4,6 +4,7 @@
  */
 package com.danielwatrous.mongodbrevisionobjects.model.mock;
 
+import com.danielwatrous.mongodbrevisionobjects.model.HistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
 import com.google.inject.Inject;
@@ -17,10 +18,10 @@ import java.util.Map;
 public class MockVersionedPerson implements VersionedPerson {
     private Person published;
     private Person draft;
-    private Map<String, Person> history;
+    private Map<String, HistoricalPerson> history;
 
     @Inject
-    public MockVersionedPerson(@Assisted("published") Person published, @Assisted("draft") Person draft, @Assisted("history") Map<String, Person> history) {
+    public MockVersionedPerson(@Assisted("published") Person published, @Assisted("draft") Person draft, @Assisted("history") Map<String, HistoricalPerson> history) {
         this.published = published;
         this.draft = draft;
         this.history = history;
@@ -42,11 +43,11 @@ public class MockVersionedPerson implements VersionedPerson {
         this.draft = draft;
     }
 
-    public Map<String, Person> getHistory() {
+    public Map<String, HistoricalPerson> getHistory() {
         return history;
     }
 
-    public void setHistory(Map<String, Person> history) {
+    public void setHistory(Map<String, HistoricalPerson> history) {
         this.history = history;
     }
 

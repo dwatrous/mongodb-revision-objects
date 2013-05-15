@@ -4,12 +4,15 @@
  */
 package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 
+import com.danielwatrous.mongodbrevisionobjects.model.HistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
 import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.Map;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -17,15 +20,25 @@ import java.util.Map;
  */
 @Entity(value = "person", noClassnameStored = true)
 public class MorphiaVersionedPerson implements VersionedPerson {
+    @Id
+    private ObjectId id;
     private Person published;
     private Person draft;
-    private Map<String, Person> history;
+    private Map<String, HistoricalPerson> history;
 
     @Inject
-    public MorphiaVersionedPerson(@Assisted("published") Person published, @Assisted("draft") Person draft, @Assisted("history") Map<String, Person> history) {
+    public MorphiaVersionedPerson(@Assisted("published") Person published, @Assisted("draft") Person draft, @Assisted("history") Map<String, HistoricalPerson> history) {
         this.published = published;
         this.draft = draft;
         this.history = history;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public Person getPublished() {
@@ -44,11 +57,11 @@ public class MorphiaVersionedPerson implements VersionedPerson {
         this.draft = draft;
     }
 
-    public Map<String, Person> getHistory() {
+    public Map<String, HistoricalPerson> getHistory() {
         return history;
     }
 
-    public void setHistory(Map<String, Person> history) {
+    public void setHistory(Map<String, HistoricalPerson> history) {
         this.history = history;
     }
 

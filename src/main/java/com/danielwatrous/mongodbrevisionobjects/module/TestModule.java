@@ -4,13 +4,13 @@
  */
 package com.danielwatrous.mongodbrevisionobjects.module;
 
-import com.danielwatrous.mongodbrevisionobjects.factory.PersonFactory;
-import com.danielwatrous.mongodbrevisionobjects.factory.PersonNameFactory;
-import com.danielwatrous.mongodbrevisionobjects.factory.VersionedPersonFactory;
+import com.danielwatrous.mongodbrevisionobjects.factory.*;
 import com.danielwatrous.mongodbrevisionobjects.model.DisplayMode;
+import com.danielwatrous.mongodbrevisionobjects.model.HistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
+import com.danielwatrous.mongodbrevisionobjects.model.mock.MockHistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.mock.MockPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.mock.MockPersonName;
 import com.danielwatrous.mongodbrevisionobjects.model.mock.MockVersionedPerson;
@@ -29,6 +29,7 @@ public class TestModule extends AbstractModule {
     @Override
     protected void configure() {
         install(new FactoryModuleBuilder().implement(Person.class, MockPerson.class).build(PersonFactory.class));
+        install(new FactoryModuleBuilder().implement(HistoricalPerson.class, MockHistoricalPerson.class).build(HistoricalPersonFactory.class));
         install(new FactoryModuleBuilder().implement(PersonName.class, MockPersonName.class).build(PersonNameFactory.class));
         install(new FactoryModuleBuilder().implement(VersionedPerson.class, MockVersionedPerson.class).build(VersionedPersonFactory.class));
 
