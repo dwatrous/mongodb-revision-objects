@@ -39,8 +39,8 @@ public class CreateData {
 
         Person publishedPerson = personFactory.create(personNameFactory.create("Daniel", "Watrous"), 32, "daniel@current.com", true);
         Person draftPerson = personFactory.create(personNameFactory.create("Daniel", "Watrous"), 33, "daniel@future.com", true);
-        HistoricalPerson history1Person = historicalPersonFactory.create(personFactory.create(personNameFactory.create("Dan", "Watrous"), 23, "daniel@oldschool.com", false));
-        HistoricalPerson history2Person = historicalPersonFactory.create(personFactory.create(personNameFactory.create("Danny", "Watrous"), 33, "daniel@beforeinternet.com", true));
+        HistoricalPerson history1Person = historicalPersonFactory.create(personFactory.create(personNameFactory.create("Danny", "Watrous"), 23, "daniel@oldschool.com", false));
+        HistoricalPerson history2Person = historicalPersonFactory.create(personFactory.create(personNameFactory.create("Dan", "Watrous"), 33, "daniel@beforeinternet.com", true));
 
         Map<String, HistoricalPerson> history = new HashMap<String, HistoricalPerson>();
         history.put("1", history1Person);
