@@ -4,6 +4,10 @@
  */
 package com.danielwatrous.mongodbrevisionobjects.persistence.dao.morphia;
 
+import com.danielwatrous.mongodbrevisionobjects.factory.HistoricalPersonFactory;
+import com.danielwatrous.mongodbrevisionobjects.factory.PersonFactory;
+import com.danielwatrous.mongodbrevisionobjects.factory.PersonNameFactory;
+import com.danielwatrous.mongodbrevisionobjects.factory.VersionedPersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.model.DisplayMode;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
@@ -25,22 +29,35 @@ import org.bson.types.ObjectId;
 public class MorphiaPersonDAO extends BasicDAO<MorphiaVersionedPerson, ObjectId> implements PersonDAO {
 
     DisplayMode displayMode;
+    PersonFactory personFactory;
+    HistoricalPersonFactory historicalPersonFactory;
+    VersionedPersonFactory versionedPersonFactory;
     
     @Inject
-    public MorphiaPersonDAO(@Named("peopleDatabase") Datastore ds, DisplayMode displayMode) {
+    public MorphiaPersonDAO(@Named("peopleDatabase") Datastore ds, 
+                            DisplayMode displayMode, 
+                            PersonFactory personFactory, 
+                            VersionedPersonFactory versionedPersonFactory) {
         super(ds);
         this.displayMode = displayMode;
+        this.personFactory = personFactory;
+        this.historicalPersonFactory = historicalPersonFactory;
+        this.versionedPersonFactory = versionedPersonFactory;
     }
 
     public void save(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // create a new versioned object
+        VersionedPerson versionedPerson = versionedPersonFactory.create(person);
+        ds.save(versionedPerson);
     }
 
     public void saveDraft(Person person, ObjectId objectid) {
         // locate and load existing record
+        VersionedPerson versionedPerson = ds.get(entityClazz, objectid);
         // overwrite existing draft Person with the Person attribute passed in with this call
+        versionedPerson.setDraft(person);
         // save versioned object
-//        ds.save(person);
+        ds.save(versionedPerson);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -56,7 +73,7 @@ public class MorphiaPersonDAO extends BasicDAO<MorphiaVersionedPerson, ObjectId>
         return getAppropriateDisplayOption(versionedPerson);
     }
 
-    public Person getPersonByName(PersonName name, String historyMarker) {
+    public Person getPersonByName(PersonName name, Integer historyMarker) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
