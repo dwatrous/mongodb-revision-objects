@@ -15,6 +15,6 @@ public interface VersionedPerson {
     void setPublished(Person published);
     Person getDraft();
     void setDraft(Person draft);
-    Map<String, HistoricalPerson> getHistory();
-    void setHistory(Map<String, HistoricalPerson> historicalPersons);
+    Map<Integer, HistoricalPerson> getHistory();
+    void addToHistory(Person historicalPerson);
 }

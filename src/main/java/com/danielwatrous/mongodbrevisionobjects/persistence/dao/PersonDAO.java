@@ -59,7 +59,7 @@ public interface PersonDAO {
      * @param historyMarker
      * @return 
      */
-    Person getPersonByName(PersonName name, String historyMarker);
+    Person getPersonByName(PersonName name, Integer historyMarker);
     
     /**
      * return a List of Person objects matching the lastName provided

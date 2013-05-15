@@ -44,7 +44,6 @@ public class MockPersonDAO implements PersonDAO {
     public MockPersonDAO(DisplayMode displayMode, 
                         PersonNameFactory personNameFactory, 
                         PersonFactory personFactory, 
-                        HistoricalPersonFactory historicalPersonFactory, 
                         VersionedPersonFactory versionedPersonFactory) {
         this.displayMode = displayMode;
         name1 = personNameFactory.create("Daniel", "Watrous");
@@ -55,14 +54,11 @@ public class MockPersonDAO implements PersonDAO {
         person1_b = personFactory.create(name1, 33, "daniel@new.com", true);
         person2 = personFactory.create(name2, 14, "jough@nootherstory.com", true);
         Person person2_b = personFactory.create(name2_b, 14, "chip@nootherstory.com", true);
-        HistoricalPerson person2_history = historicalPersonFactory.create(person2_b);
-        Map<String, HistoricalPerson> historicalPersons = new HashMap<String, HistoricalPerson>();
-        historicalPersons.put("1", person2_history);
         person3 = personFactory.create(name3, 32, "ted@bear.com", false);
         versionedPerson1 = versionedPersonFactory.create(person1);
         versionedPerson1.setDraft(person1_b);
         versionedPerson2 = versionedPersonFactory.create(person2);
-        versionedPerson2.setHistory(historicalPersons);
+        versionedPerson2.addToHistory(person2_b);
         versionedPerson3 = versionedPersonFactory.create(person3);
     }
     
@@ -86,7 +82,7 @@ public class MockPersonDAO implements PersonDAO {
         }
     }
 
-    public Person getPersonByName(PersonName name, String historyMarker) {
+    public Person getPersonByName(PersonName name, Integer historyMarker) {
         return versionedPerson2.getHistory().get(historyMarker).getPerson();
     }
 

@@ -55,7 +55,7 @@ public class TestPersonDAO extends TestCase {
     }
 
     public void testRetrievePersonHistory() {
-        String historyMarker = "1";
+        Integer historyMarker = 1;
         // retrieve personDAO and query for a Person with history marker
         PersonDAO personDAO = injector.getInstance(PersonDAO.class);
         PersonName searchName = injector.getInstance(PersonNameFactory.class).create("Jough", "Psmyth");
