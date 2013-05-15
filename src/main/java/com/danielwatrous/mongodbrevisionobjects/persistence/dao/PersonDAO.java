@@ -7,6 +7,7 @@ package com.danielwatrous.mongodbrevisionobjects.persistence.dao;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -14,17 +15,30 @@ import java.util.List;
  */
 public interface PersonDAO {
     /**
-     * this will overwrite the current draft document with the provided Person object
+     * This assumes no existing person object and creates a new VersionedPerson object
+     * and then adds it to the datastore
+     * 
      * @param person 
      */
-    void saveAsDraft(Person person);
+    void save(Person person);
+    
+    /**
+     * this will overwrite the current draft document with the provided Person object
+     * 
+     * @param person 
+     * @param objectid to identify existing versioned record
+     */
+    void saveDraft(Person person, ObjectId objectid);
     
     /**
      * publish will save the currently published document in history and then 
      * overwrite the published document with the document currently found in 
      * draft
+     * 
+     * @param person 
+     * @param objectid to identify existing versioned record
      */
-    void publish();
+    void publish(Person person, ObjectId objectid);
     
     /**
      * return a Person matching the PersonName provided. If multiple Person objects

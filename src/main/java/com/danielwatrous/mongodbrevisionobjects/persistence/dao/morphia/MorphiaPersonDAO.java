@@ -32,12 +32,22 @@ public class MorphiaPersonDAO extends BasicDAO<MorphiaVersionedPerson, ObjectId>
         this.displayMode = displayMode;
     }
 
-    public void saveAsDraft(Person person) {
+    public void save(Person person) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void saveDraft(Person person, ObjectId objectid) {
+        // locate and load existing record
+        // overwrite existing draft Person with the Person attribute passed in with this call
+        // save versioned object
 //        ds.save(person);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void publish() {
+    public void publish(Person person, ObjectId objectid) {
+        // locate and load existing record
+        // save currently published object in history
+        // overwrite published Person with the Person attribute passed in with this call
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
