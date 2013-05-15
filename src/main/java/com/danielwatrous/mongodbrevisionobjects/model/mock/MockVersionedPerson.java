@@ -21,7 +21,7 @@ public class MockVersionedPerson implements VersionedPerson {
     private Map<String, HistoricalPerson> history;
 
     @Inject
-    public MockVersionedPerson(@Assisted("published") Person published, @Assisted("draft") Person draft, @Assisted("history") Map<String, HistoricalPerson> history) {
+    public MockVersionedPerson(@Assisted("published") Person published) {
         this.published = published;
         this.draft = draft;
         this.history = history;

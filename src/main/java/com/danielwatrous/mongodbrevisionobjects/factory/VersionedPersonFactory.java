@@ -15,8 +15,5 @@ import java.util.Map;
  * @author watrous
  */
 public interface VersionedPersonFactory {
-    //To use multiple parameters of the same type, use a named @Assisted annotation with a String value to disambiguate the parameters.
-    VersionedPerson create(@Assisted("published") Person published, 
-                           @Assisted("draft") Person draft, 
-                           @Assisted("history") Map<String, HistoricalPerson> history);
+    VersionedPerson create(@Assisted("published") Person published);
 }

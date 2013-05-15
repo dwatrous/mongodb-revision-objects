@@ -46,7 +46,9 @@ public class CreateData {
         history.put("1", history1Person);
         history.put("2", history2Person);
         
-        VersionedPerson versionedPerson = versionedPersonFactory.create(publishedPerson, draftPerson, history);
+        VersionedPerson versionedPerson = versionedPersonFactory.create(publishedPerson);
+        versionedPerson.setDraft(draftPerson);
+        versionedPerson.setHistory(history);
         
         Datastore ds = injector.getInstance(Key.get(Datastore.class, Names.named("peopleDatabase")));
         ds.save(versionedPerson);

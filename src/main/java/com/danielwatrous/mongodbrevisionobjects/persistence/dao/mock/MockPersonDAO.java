@@ -59,9 +59,11 @@ public class MockPersonDAO implements PersonDAO {
         Map<String, HistoricalPerson> historicalPersons = new HashMap<String, HistoricalPerson>();
         historicalPersons.put("1", person2_history);
         person3 = personFactory.create(name3, 32, "ted@bear.com", false);
-        versionedPerson1 = versionedPersonFactory.create(person1, person1_b, new HashMap<String, HistoricalPerson>());
-        versionedPerson2 = versionedPersonFactory.create(person2, person2, historicalPersons);
-        versionedPerson3 = versionedPersonFactory.create(person3, person3, new HashMap<String, HistoricalPerson>());
+        versionedPerson1 = versionedPersonFactory.create(person1);
+        versionedPerson1.setDraft(person1_b);
+        versionedPerson2 = versionedPersonFactory.create(person2);
+        versionedPerson2.setHistory(historicalPersons);
+        versionedPerson3 = versionedPersonFactory.create(person3);
     }
     
     public void save(Person person) {
