@@ -49,9 +49,7 @@ public class MockVersionedPerson implements VersionedPerson {
         return history;
     }
 
-    public void addToHistory(Person person) {
-        // create HistoricalPerson
-        HistoricalPerson newHistoricalPerson = historicalPersonFactory.create(person);
+    public void addToHistory(HistoricalPerson person) {
         // ensure at least an empty Map
         if (this.history == null) {
             this.history = new HashMap<Integer, HistoricalPerson>();
@@ -66,7 +64,7 @@ public class MockVersionedPerson implements VersionedPerson {
             }
         }
         // add to Map with next history value
-        this.history.put(historicalMarker, newHistoricalPerson);
+        this.history.put(historicalMarker, person);
     }
 
 }

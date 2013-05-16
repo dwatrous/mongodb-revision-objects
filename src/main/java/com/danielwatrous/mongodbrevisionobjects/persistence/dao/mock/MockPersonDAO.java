@@ -44,6 +44,7 @@ public class MockPersonDAO implements PersonDAO {
     public MockPersonDAO(DisplayMode displayMode, 
                         PersonNameFactory personNameFactory, 
                         PersonFactory personFactory, 
+                        HistoricalPersonFactory historicalPersonFactory, 
                         VersionedPersonFactory versionedPersonFactory) {
         this.displayMode = displayMode;
         name1 = personNameFactory.create("Daniel", "Watrous");
@@ -53,7 +54,7 @@ public class MockPersonDAO implements PersonDAO {
         person1 = personFactory.create(name1, 32, "daniel@test.com", true);
         person1_b = personFactory.create(name1, 33, "daniel@new.com", true);
         person2 = personFactory.create(name2, 14, "jough@nootherstory.com", true);
-        Person person2_b = personFactory.create(name2_b, 14, "chip@nootherstory.com", true);
+        HistoricalPerson person2_b = historicalPersonFactory.create(personFactory.create(name2_b, 14, "chip@nootherstory.com", true));
         person3 = personFactory.create(name3, 32, "ted@bear.com", false);
         versionedPerson1 = versionedPersonFactory.create(person1);
         versionedPerson1.setDraft(person1_b);
