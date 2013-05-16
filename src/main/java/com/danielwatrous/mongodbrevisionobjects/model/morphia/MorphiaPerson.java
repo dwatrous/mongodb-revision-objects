@@ -6,19 +6,24 @@ package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Transient;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author watrous
  */
-@Entity(noClassnameStored = true)
 public class MorphiaPerson implements Person {
+    @Transient private ObjectId id;
     private Person.PersonName name;
     private Integer age;
     private String email;
     private boolean happy;
+
+    public MorphiaPerson() {
+    }
 
     @Inject
     public MorphiaPerson(@Assisted PersonName name, @Assisted Integer age, @Assisted String email, @Assisted boolean happy) {
@@ -59,4 +64,13 @@ public class MorphiaPerson implements Person {
     public void setHappy(boolean happy) {
         this.happy = happy;
     }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+    
 }
