@@ -81,7 +81,7 @@ public class MorphiaPersonDAO extends BasicDAO<MorphiaVersionedPerson, ObjectId>
     }
 
     public Person getPersonByName(PersonName name, Integer historyMarker) {
-        MorphiaVersionedPerson versionedPerson =  ds.find(entityClazz).filter("published.name", name).get();
+        MorphiaVersionedPerson versionedPerson =  ds.find(entityClazz).disableValidation().filter("published.name", name).get();
         return versionedPerson.getHistory().get(historyMarker).getPerson();
     }
 
