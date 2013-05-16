@@ -26,9 +26,8 @@ public interface PersonDAO {
      * this will overwrite the current draft document with the provided Person object
      * 
      * @param person 
-     * @param objectid to identify existing versioned record
      */
-    void saveDraft(Person person, ObjectId objectid);
+    void saveDraft(Person person);
     
     /**
      * publish will save the currently published document in history and then 
@@ -36,9 +35,8 @@ public interface PersonDAO {
      * draft
      * 
      * @param person 
-     * @param objectid to identify existing versioned record
      */
-    void publish(Person person, ObjectId objectid);
+    void publish(Person person);
     
     /**
      * return a Person matching the PersonName provided. If multiple Person objects

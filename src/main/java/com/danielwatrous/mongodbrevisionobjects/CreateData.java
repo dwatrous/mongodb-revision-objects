@@ -40,23 +40,23 @@ public class CreateData {
         PersonFactory personFactory = injector.getInstance(PersonFactory.class);
         VersionedPersonFactory versionedPersonFactory = injector.getInstance(VersionedPersonFactory.class);
 
-        PersonName name = personNameFactory.create("Daniel", "Watrous");
-        Person publishedPerson = personFactory.create(name, 32, "daniel@current.com", true);
+        PersonName name = personNameFactory.create("Danny", "Watrous");
+        Person publishedPerson = personFactory.create(name, 15, "daniel@beforeinternet.com", true);
         personDao.save(publishedPerson);
         
-//        VersionedPerson versionedPerson = personDao.getPersonByName(name);
+        // get the person we just saved above (for the object ID
+        Person retrievedPerson = personDao.getPersonByName(name);
+        retrievedPerson.setAge(23);
+        retrievedPerson.setEmail("daniel@oldschool.com");
+        personDao.publish(retrievedPerson);
         
-        Person draftPerson = personFactory.create(personNameFactory.create("Daniel", "Watrous"), 33, "daniel@future.com", true);
-        Person history1Person = personFactory.create(personNameFactory.create("Danny", "Watrous"), 23, "daniel@oldschool.com", false);
-        Person history2Person = personFactory.create(personNameFactory.create("Dan", "Watrous"), 33, "daniel@beforeinternet.com", true);
-
-        VersionedPerson versionedPerson = versionedPersonFactory.create(publishedPerson);
-        versionedPerson.setDraft(draftPerson);
-        versionedPerson.addToHistory(history1Person);
-        versionedPerson.addToHistory(history2Person);
+        retrievedPerson.setAge(32);
+        retrievedPerson.setEmail("daniel@current.com");
+        personDao.publish(retrievedPerson);
         
-        Datastore ds = injector.getInstance(Key.get(Datastore.class, Names.named("peopleDatabase")));
-//        ds.save(versionedPerson);
+        retrievedPerson.setAge(33);
+        retrievedPerson.setEmail("daniel@future.com");
+        personDao.saveDraft(retrievedPerson);
         
     }
 }

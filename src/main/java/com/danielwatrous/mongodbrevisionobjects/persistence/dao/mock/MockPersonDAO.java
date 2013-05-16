@@ -66,11 +66,11 @@ public class MockPersonDAO implements PersonDAO {
         throw new UnsupportedOperationException("Not supported in test."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void saveDraft(Person person, ObjectId objectid) {
+    public void saveDraft(Person person) {
         throw new UnsupportedOperationException("Not supported in test."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void publish(Person person, ObjectId objectid) {
+    public void publish(Person person) {
         throw new UnsupportedOperationException("Not supported in test."); //To change body of generated methods, choose Tools | Templates.
     }
 

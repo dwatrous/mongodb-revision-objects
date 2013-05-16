@@ -28,7 +28,12 @@ public class MorphiaVersionedPerson implements VersionedPerson {
     private Person published;
     private Person draft;
     private Map<Integer, HistoricalPerson> history;
-    @Transient private HistoricalPersonFactory historicalPersonFactory;
+    @Transient
+    @Inject
+    private HistoricalPersonFactory historicalPersonFactory;
+
+    public MorphiaVersionedPerson() {
+    }
 
     @Inject
     public MorphiaVersionedPerson(@Assisted("published") Person published, HistoricalPersonFactory historicalPersonFactory) {

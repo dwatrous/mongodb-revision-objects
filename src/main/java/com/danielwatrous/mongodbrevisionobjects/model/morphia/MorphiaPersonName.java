@@ -13,10 +13,12 @@ import com.google.inject.assistedinject.Assisted;
  *
  * @author watrous
  */
-@Entity(noClassnameStored = true)
 public class MorphiaPersonName implements Person.PersonName {
     private String firstName;
     private String lastName;
+
+    public MorphiaPersonName() {
+    }
 
     @Inject
     public MorphiaPersonName(@Assisted("firstName") String firstName, @Assisted("lastName") String lastName) {
