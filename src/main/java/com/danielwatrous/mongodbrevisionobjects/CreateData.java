@@ -4,24 +4,15 @@
  */
 package com.danielwatrous.mongodbrevisionobjects;
 
-import com.danielwatrous.mongodbrevisionobjects.factory.HistoricalPersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.factory.PersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.factory.PersonNameFactory;
 import com.danielwatrous.mongodbrevisionobjects.factory.VersionedPersonFactory;
-import com.danielwatrous.mongodbrevisionobjects.model.HistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
-import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
 import com.danielwatrous.mongodbrevisionobjects.module.MorphiaModule;
 import com.danielwatrous.mongodbrevisionobjects.persistence.dao.PersonDAO;
-import com.google.code.morphia.Datastore;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.name.Named;
-import com.google.inject.name.Names;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
