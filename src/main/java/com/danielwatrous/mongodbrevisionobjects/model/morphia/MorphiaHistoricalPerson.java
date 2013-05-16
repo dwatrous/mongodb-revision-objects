@@ -15,10 +15,12 @@ import java.util.Date;
  *
  * @author watrous
  */
-@Entity(noClassnameStored = true)
 public class MorphiaHistoricalPerson implements HistoricalPerson {
     private Person person;
     private Date dateRetired;
+
+    public MorphiaHistoricalPerson() {
+    }
 
     @Inject
     public MorphiaHistoricalPerson(@Assisted Person person) {

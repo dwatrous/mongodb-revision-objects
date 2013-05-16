@@ -46,11 +46,13 @@ public class CreateData {
         
         // get the person we just saved above (for the object ID
         Person retrievedPerson = personDao.getPersonByName(name);
+        retrievedPerson.getName().setFirstName("Dan");
         retrievedPerson.setAge(23);
         retrievedPerson.setEmail("daniel@oldschool.com");
         personDao.publish(retrievedPerson);
         
         retrievedPerson.setAge(32);
+        retrievedPerson.getName().setFirstName("Daniel");
         retrievedPerson.setEmail("daniel@current.com");
         personDao.publish(retrievedPerson);
         

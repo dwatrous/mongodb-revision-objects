@@ -16,5 +16,5 @@ public interface VersionedPerson {
     Person getDraft();
     void setDraft(Person draft);
     Map<Integer, HistoricalPerson> getHistory();
-    void addToHistory(Person historicalPerson);
+    void addToHistory(HistoricalPerson historicalPerson);
 }

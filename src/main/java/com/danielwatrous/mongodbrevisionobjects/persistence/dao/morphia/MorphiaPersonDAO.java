@@ -4,9 +4,11 @@
  */
 package com.danielwatrous.mongodbrevisionobjects.persistence.dao.morphia;
 
+import com.danielwatrous.mongodbrevisionobjects.factory.HistoricalPersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.factory.PersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.factory.VersionedPersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.model.DisplayMode;
+import com.danielwatrous.mongodbrevisionobjects.model.HistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
@@ -30,16 +32,19 @@ public class MorphiaPersonDAO extends BasicDAO<MorphiaVersionedPerson, ObjectId>
 
     DisplayMode displayMode;
     PersonFactory personFactory;
+    HistoricalPersonFactory historicalPersonFactory;
     VersionedPersonFactory versionedPersonFactory;
     
     @Inject
     public MorphiaPersonDAO(@Named("peopleDatabase") Datastore ds, 
                             DisplayMode displayMode, 
                             PersonFactory personFactory, 
+                            HistoricalPersonFactory historicalPersonFactory,
                             VersionedPersonFactory versionedPersonFactory) {
         super(ds);
         this.displayMode = displayMode;
         this.personFactory = personFactory;
+        this.historicalPersonFactory = historicalPersonFactory;
         this.versionedPersonFactory = versionedPersonFactory;
     }
 
@@ -61,8 +66,9 @@ public class MorphiaPersonDAO extends BasicDAO<MorphiaVersionedPerson, ObjectId>
     public void publish(Person person) {
         // locate and load existing record
         VersionedPerson versionedPerson = ds.get(entityClazz, ((MorphiaPerson)person).getId());
-        // save currently published object in history
-        versionedPerson.addToHistory(versionedPerson.getPublished());
+        // save currently published Person in history
+        HistoricalPerson historicalPerson = historicalPersonFactory.create(versionedPerson.getPublished());
+        versionedPerson.addToHistory(historicalPerson);
         // overwrite published Person with the Person attribute passed in with this call
         versionedPerson.setPublished(person);
         // save versioned object

@@ -28,17 +28,13 @@ public class MorphiaVersionedPerson implements VersionedPerson {
     private Person published;
     private Person draft;
     private Map<Integer, HistoricalPerson> history;
-    @Transient
-    @Inject
-    private HistoricalPersonFactory historicalPersonFactory;
 
     public MorphiaVersionedPerson() {
     }
 
     @Inject
-    public MorphiaVersionedPerson(@Assisted("published") Person published, HistoricalPersonFactory historicalPersonFactory) {
+    public MorphiaVersionedPerson(@Assisted("published") Person published) {
         this.published = published;
-        this.historicalPersonFactory = historicalPersonFactory;
     }
 
     public ObjectId getId() {
@@ -69,9 +65,7 @@ public class MorphiaVersionedPerson implements VersionedPerson {
         return history;
     }
 
-    public void addToHistory(Person person) {
-        // create HistoricalPerson
-        HistoricalPerson newHistoricalPerson = historicalPersonFactory.create(person);
+    public void addToHistory(HistoricalPerson historicalPerson) {
         // ensure at least an empty Map
         if (this.history == null) {
             this.history = new HashMap<Integer, HistoricalPerson>();
@@ -86,7 +80,7 @@ public class MorphiaVersionedPerson implements VersionedPerson {
             }
         }
         // add to Map with next history value
-        this.history.put(historicalMarker, newHistoricalPerson);
+        this.history.put(historicalMarker, historicalPerson);
     }
 
 }
