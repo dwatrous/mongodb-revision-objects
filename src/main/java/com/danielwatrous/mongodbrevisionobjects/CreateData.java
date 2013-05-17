@@ -29,7 +29,6 @@ public class CreateData {
         
         PersonNameFactory personNameFactory = injector.getInstance(PersonNameFactory.class);
         PersonFactory personFactory = injector.getInstance(PersonFactory.class);
-        VersionedPersonFactory versionedPersonFactory = injector.getInstance(VersionedPersonFactory.class);
 
         PersonName name = personNameFactory.create("Danny", "Watrous");
         Person publishedPerson = personFactory.create(name, 15, "daniel@beforeinternet.com", true);
