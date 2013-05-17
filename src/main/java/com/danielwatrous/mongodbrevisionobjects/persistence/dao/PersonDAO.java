@@ -31,8 +31,7 @@ public interface PersonDAO {
     
     /**
      * publish will save the currently published document in history and then 
-     * overwrite the published document with the document currently found in 
-     * draft
+     * overwrite the published document with the document passed in
      * 
      * @param person 
      */
