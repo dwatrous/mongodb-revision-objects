@@ -7,7 +7,6 @@ package com.danielwatrous.mongodbrevisionobjects.persistence.dao;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.Person.PersonName;
 import java.util.List;
-import org.bson.types.ObjectId;
 
 /**
  *
