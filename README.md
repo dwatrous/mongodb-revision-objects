@@ -43,3 +43,6 @@ personDao.saveDraft(retrievedPerson);
 // or publish (this automatically manages history)
 personDao.publish(retrievedPerson);
 ```
+
+Some additional discussion of this project and a description of my design goals is provided here:
+http://software.danielwatrous.com/using-java-to-work-with-versioned-data/
