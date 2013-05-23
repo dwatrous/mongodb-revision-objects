@@ -4,13 +4,12 @@
  */
 package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 
-import com.danielwatrous.mongodbrevisionobjects.factory.HistoricalPersonFactory;
 import com.danielwatrous.mongodbrevisionobjects.model.HistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
 import com.danielwatrous.mongodbrevisionobjects.model.VersionedPerson;
+import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
-import com.google.code.morphia.annotations.Transient;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.HashMap;
@@ -25,8 +24,11 @@ import org.bson.types.ObjectId;
 public class MorphiaVersionedPerson implements VersionedPerson {
     @Id
     private ObjectId id;
+    @Embedded(concreteClass = MorphiaPerson.class)
     private Person published;
+    @Embedded(concreteClass = MorphiaPerson.class)
     private Person draft;
+    @Embedded
     private Map<Integer, HistoricalPerson> history;
 
     public MorphiaVersionedPerson() {

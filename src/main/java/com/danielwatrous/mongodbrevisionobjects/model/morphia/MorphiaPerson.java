@@ -5,6 +5,7 @@
 package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Transient;
 import com.google.inject.Inject;
@@ -15,8 +16,11 @@ import org.bson.types.ObjectId;
  *
  * @author watrous
  */
+@Entity(noClassnameStored = true)
+@Embedded()
 public class MorphiaPerson implements Person {
     @Transient private ObjectId id;
+    @Embedded(concreteClass = MorphiaPersonName.class)
     private Person.PersonName name;
     private Integer age;
     private String email;

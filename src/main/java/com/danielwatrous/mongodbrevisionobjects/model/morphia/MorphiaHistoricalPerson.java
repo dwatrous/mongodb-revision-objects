@@ -6,7 +6,7 @@ package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 
 import com.danielwatrous.mongodbrevisionobjects.model.HistoricalPerson;
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
-import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Embedded;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.Date;
@@ -15,7 +15,10 @@ import java.util.Date;
  *
  * @author watrous
  */
+//@Entity(noClassnameStored = true)
+@Embedded()
 public class MorphiaHistoricalPerson implements HistoricalPerson {
+    @Embedded(concreteClass = MorphiaPerson.class)
     private Person person;
     private Date dateRetired;
 

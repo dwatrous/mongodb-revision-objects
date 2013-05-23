@@ -5,6 +5,7 @@
 package com.danielwatrous.mongodbrevisionobjects.model.morphia;
 
 import com.danielwatrous.mongodbrevisionobjects.model.Person;
+import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Entity;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -13,6 +14,8 @@ import com.google.inject.assistedinject.Assisted;
  *
  * @author watrous
  */
+@Entity(noClassnameStored = true)
+@Embedded()
 public class MorphiaPersonName implements Person.PersonName {
     private String firstName;
     private String lastName;
